@@ -1,3 +1,6 @@
+# Operating System
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -57,7 +60,6 @@ cover/
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -151,6 +153,9 @@ activemq-data/
 
 # Environments
 .env
+.env.*
+!.env.example
+!.env.template
 .envrc
 .venv
 env/
@@ -218,3 +223,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project specific
+/data/
+/embeddings/
+/checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+/Group_*.zip
