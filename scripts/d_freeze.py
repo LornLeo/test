@@ -1,7 +1,7 @@
 """Role D: freeze the Stage 2 choice (Role C's proposals) before any Test evaluation.
 
-Recomputes the predeclared decision (scripts/d_c_analysis.py, docs/D_STAGE2_PLAN.md
-section 4), checks the representative checkpoint's SHA-256 against its training
+Recomputes the predeclared decision (scripts/d_c_analysis.py, report Section 5.3),
+checks the representative checkpoint's SHA-256 against its training
 record, reloads it on Dev only (src.model.evaluate asserts the reloaded Dev scores
 equal the selection scores), and writes results/stage2_c_final/freeze.json.
 Never touches Test.
@@ -35,8 +35,8 @@ IDEAS = {
 
 
 def compatible_copy(checkpoint):
-    """Checkpoints trained on role-d-stage2 store that branch's unused S1 field
-    frozen_vocab_size=0. This branch's ModelConfig has no such field, so the Dev reload
+    """The C1 checkpoints store one unused config field, frozen_vocab_size=0.
+    This code's ModelConfig has no such field, so the Dev reload
     uses a copy without it. Only that config key is removed; tensors are unchanged."""
     payload = torch.load(checkpoint, map_location="cpu", weights_only=True)
     fields = {f.name for f in dataclasses.fields(ModelConfig)}

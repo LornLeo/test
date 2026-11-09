@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Role D design sensitivity sweep (docs/D_SWEEP_PLAN.md). Dev only; Test is never used.
+# Role D design sensitivity sweep (report Section 8). Dev only; Test is never used.
 #
 #   bash scripts/d_sweep_runs.sh all            # every run in the plan, MAX_JOBS at a time
 #   bash scripts/d_sweep_runs.sh depth|width|ablation

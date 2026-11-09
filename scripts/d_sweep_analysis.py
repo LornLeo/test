@@ -2,7 +2,7 @@
 
 Reads only saved Dev summaries (results/sweep/*/summary.json and the reused R runs in
 results/stage2/d_stage1_ref_s*). Writes results/role_d/sweep_analysis.json and three
-figures. Test is never read. Rules: docs/D_SWEEP_PLAN.md section 2.
+figures. Test is never read. Rules: report Section 8.
 
 Usage (from the repository root):
     python -m scripts.d_sweep_analysis

@@ -2,7 +2,7 @@
 
 Reads only saved Dev outputs under results/stage2/ (summary.json and the Git-ignored
 dev_predictions.jsonl). Writes results/role_d/c_analysis.json. Test is never read.
-Rules: docs/D_STAGE2_PLAN.md sections 3-4.
+Rules: report Sections 4 and 5.3.
 
 Usage (from the repository root):
     python -m scripts.d_c_analysis
@@ -117,7 +117,7 @@ def main():
             raise FileNotFoundError(f"{label} needs seeds {SEEDS}")
     means = {label: three_seed(list(r.values())) for label, r in runs.items() if len(r) == 3}
 
-    # Rule 1: C1 seed-42 gate against R seed 42 (predeclared on role-d-stage2, f147e58).
+    # Rule 1: C1 seed-42 gate against R seed 42 (predeclared in f147e58).
     gate_c1 = runs["R"][42]["selection_score"]
     rules = {
         "rule1_c1_gate": gate_c1,

@@ -57,16 +57,14 @@ INTRO = """# Stage 2 system: AI-assisted improvement from Role C's proposals (Ro
 
 **How Stage 2 was made:**
 - **Proposals, with AI:** Role C's AI-assisted analysis of Stage 1 ("Part C") proposed two experiments. C1 (primary): class-weighted intent cross-entropy, so that rare intents count more. C2 (secondary): a longer training budget.
-- **The rules,** committed before the runs (`docs/D_STAGE2_PLAN.md`):
+- **The rules,** committed before the runs (report Section 4):
   - every change is compared with Stage 1 retrained on the same machine, on Dev only;
   - C1 is confirmed on 3 seeds;
   - C2 (C1 trained for up to 100 epochs, patience 12) must beat C1 on seed 42 before more seeds are run;
   - Stage 2 is C1 unless C2 has the higher 3-seed mean;
   - seed 42 is the representative seed.
-- **The outcome** is in `docs/D_FINAL_SELECTION.md` and `results/stage2_c_final/freeze.json`.
+- **The outcome** is in report Section 5.3 and `results/stage2_c_final/freeze.json`.
 - **Test:** used only once, in the last cell, after the freeze. Nothing is changed after it.
-
-**Disclosure:** another Stage 2 candidate (S1, frozen GloVe vectors for out-of-Train words) was explored on branch `role-d-stage2` and evaluated on Test there. This notebook does not use it.
 
 **What this notebook does:**
 1. Embeds and tests the complete source.
