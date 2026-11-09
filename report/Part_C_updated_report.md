@@ -204,7 +204,40 @@ Stage 1 is B's frozen weight-2, seed-42 model. Stage 2 is C1, seed 42, chosen on
 
 On Dev, Stage 2 corrected 27 Stage 1 intent errors but made 35 new ones (269 errors in total, against 261). Twelve of the new errors have gold intent `general_quirky`. The number of utterances with any slot error fell from 475 to 456.
 
-### 5.3 Genuine Stage 2 errors (Dev)
+### 5.3 Final selection
+
+The Stage 2 system was chosen on Dev by rules fixed before the runs, then frozen before any Test evaluation.
+
+| Step | Rule (fixed in advance) | Outcome |
+| --- | --- | --- |
+| Comparison point | Stage 1 recipe retrained on the same machine (R), seeds 42, 43, 44 | 83.51 / 83.96 / 84.39, mean 83.96 |
+| C1 gate | C1 seed 42 must beat R seed 42 (83.51) | 84.29: passed, so seeds 43 and 44 were run |
+| C2 gate | C2 seed 42 must beat C1 seed 42 (84.29) | 84.29 at the same best epoch: failed, so no more seeds |
+| Stage 2 configuration | C1, unless C2 passes and has a higher 3-seed mean; a tie goes to C1, the simpler setting | C1 |
+| Submitted checkpoint | Seed 42 of the chosen configuration, fixed before training | `d_intentcw_s42` |
+| Test | Once, after the freeze, on the reproduced checkpoint | 85.57% intent, 78.59% slot F1 |
+
+**Frozen model record** (`results/stage2_c_final/freeze.json`, written 2026-11-08 17:30 SGT, before any Test evaluation of C1 or C2)
+
+| Item | Value |
+| --- | --- |
+| Run | `d_intentcw_s42` |
+| Change from Stage 1 | Class-weighted intent loss only (weights 0.53–5.39, from Train labels, training loss only) |
+| Parameters | 907,002 total and trainable |
+| Best epoch / epochs run | 49 / 57 (early stopping, patience 8) |
+| Dev intent / slot F1 / selection score | 86.77 / 81.81 / 84.29 |
+| Fresh Dev reload at freeze time | 86.77 / 81.81 on 2,033 examples, an exact match |
+| Checkpoint SHA-256 | `42a1ef8d…b5818` |
+| Notebook retrain before Test | Same Dev scores and identical model weights (model-state SHA-256 `c183c339…0dce` in both) |
+| Environment | Windows 11, Python 3.12.3, torch 2.9.1 (CPU), 2 threads |
+
+**Caveats to state in the report**
+
+1. **The scope was chosen after seeing results.** Limiting Stage 2 to C's proposals was decided after C1's 3-seed Dev results were known. The C2 gate and the selection rule were committed before C2 ran.
+2. **Selected, not proven better.** C1's 3-seed mean equals the Stage 1 recipe's (+0.01), so the report claims no improvement.
+3. **Different machines.** The reported Stage 1 system was trained on macOS; the fair Dev comparison is with R, trained on the same machine as Stage 2.
+
+### 5.4 Genuine Stage 2 errors (Dev)
 
 The three errors below come from the frozen Stage 2 model's Dev predictions. In each one the intent was correct under Stage 1 and wrong under Stage 2. The explanations are hypotheses, not tested causes.
 

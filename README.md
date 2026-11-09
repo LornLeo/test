@@ -158,7 +158,7 @@ Output: `results/role_d/c_analysis.json`.
 
 I compared the frozen Stage 2 model's Dev predictions with Stage 1's.
 - Stage 2 fixed 27 intent errors but made 35 new ones, 12 of them on `general_quirky`.
-- Three genuine Stage 2 errors are analysed in report Section 5.3.
+- Three genuine Stage 2 errors are analysed in report Section 5.4.
 
 ### Step 8. Design sensitivity sweep (in progress)
 
