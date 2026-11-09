@@ -1,0 +1,150 @@
+{
+  "stage": "Stage 2 (AI-assisted, Role C's proposals), Role D",
+  "frozen_at_utc": "2026-11-08T09:30:13+00:00",
+  "code_commit": "3224922e9eca87cbd5481c2a24054a88c3718e2a",
+  "working_tree_clean_for_src": true,
+  "configuration": "C1",
+  "idea": "Role C's proposal C1: class-weighted intent loss",
+  "representative_seed": 42,
+  "run": "d_intentcw_s42",
+  "arguments": {
+    "data": "data/1.0/data/en-US.jsonl",
+    "run_dir": "results/stage2/d_intentcw_s42",
+    "checkpoint": "checkpoints/stage2/d_intentcw_s42.pt",
+    "epochs": 60,
+    "patience": 8,
+    "batch_size": 64,
+    "embedding_dim": 100,
+    "hidden_dim": 128,
+    "layers": 1,
+    "dropout": 0.3,
+    "learning_rate": 0.001,
+    "weight_decay": 1e-05,
+    "slot_weight": 2.0,
+    "min_frequency": 1,
+    "word_vectors": "embeddings/glove_train_100.txt",
+    "freeze_embeddings": false,
+    "char_features": true,
+    "decoder": "crf",
+    "word_dropout": 0.1,
+    "intent_pooling": "mean_max",
+    "char_channels": 64,
+    "extra_word_vectors": null,
+    "extra_words": 0,
+    "intent_class_weights": true,
+    "seed": 42,
+    "device": "cpu",
+    "threads": 2,
+    "cuda_memory_fraction": 0.0,
+    "resume": null
+  },
+  "intent_class_weights": {
+    "formula": "(median/count)^0.5 clipped to [0.25, 4.0], Train-example mean 1",
+    "min": 0.5339459180831909,
+    "max": 5.393837928771973,
+    "applies_to": "training loss only"
+  },
+  "model_config": {
+    "vocab_size": 5304,
+    "num_intents": 60,
+    "num_tags": 111,
+    "embedding_dim": 100,
+    "hidden_dim": 128,
+    "num_layers": 1,
+    "dropout": 0.3,
+    "freeze_embeddings": false,
+    "char_vocab_size": 35,
+    "char_embedding_dim": 16,
+    "char_channels": 64,
+    "decoder": "crf",
+    "word_dropout": 0.1,
+    "intent_pooling": "mean_max",
+    "frozen_vocab_size": 0
+  },
+  "parameters": {
+    "total": 907002,
+    "trainable": 907002
+  },
+  "best_epoch": 49,
+  "epochs_run": 57,
+  "selection": "mean of Dev intent_accuracy_pct and slot_micro_f1_pct",
+  "dev_selection_score": 84.28868395098957,
+  "dev_metrics": {
+    "intent_accuracy_pct": 86.7683226758485,
+    "slot_micro_f1_pct": 81.80904522613065,
+    "slot_tp": 1628,
+    "slot_fp": 340,
+    "slot_fn": 384
+  },
+  "fresh_dev_reload": {
+    "intent_accuracy_pct": 86.7683226758485,
+    "slot_micro_f1_pct": 81.80904522613065,
+    "num_examples": 2033
+  },
+  "checkpoint": "checkpoints/stage2/d_intentcw_s42.pt",
+  "checkpoint_sha256": "42a1ef8de7fea50525ee23449659bc3c8a0d83b7a0628caa20aede8b601b5818",
+  "checkpoint_bytes": 3759073,
+  "dev_reload_compatibility": {
+    "removed_model_config_fields": {
+      "frozen_vocab_size": 0
+    },
+    "reason": "trained with role-d-stage2 code; S1 option unused (0)",
+    "evaluated_copy": "checkpoints/stage2_c/d_intentcw_s42_compat.pt",
+    "evaluated_copy_sha256": "b8c9b0977adc99eb91361c7ced1914f6cbaa5a898c98bcfd54b79c44c3bf5119",
+    "model_state_sha256": "c183c3395ff6e313954d8393329f43db3161be208b1bb367622e9c7f76a00dce",
+    "tensors_identical": true
+  },
+  "data_sha256": "c70f75c6a543a26e249ec383df67733ad9b1066f6c0406c2e04a3f03356e407e",
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.9.1+cpu",
+    "numpy": "2.5.4",
+    "device": "cpu",
+    "platform": "Windows-11-10.0.22631-SP0"
+  },
+  "decision": {
+    "plan": "docs/D_STAGE2_PLAN.md section 4",
+    "analysis": "results/role_d/c_analysis.json",
+    "rules": {
+      "rule1_c1_gate": 83.51432138938287,
+      "rule1_c1_passes": true,
+      "rule2_c2_gate": 84.28868395098957,
+      "rule2_c2_passes": false,
+      "stage2_configuration": "C1",
+      "stage2_run": "d_intentcw_s42",
+      "rule5_mean_vs_reference_pp": 0.00694542049556901
+    },
+    "three_seed_means": {
+      "R": {
+        "intent_accuracy_pct": {
+          "mean": 87.17822593867848,
+          "sample_sd": 0.34897190775197146
+        },
+        "slot_micro_f1_pct": {
+          "mean": 80.73394341973776,
+          "sample_sd": 0.5354255432441952
+        },
+        "selection_score": {
+          "mean": 83.95608467920812,
+          "sample_sd": 0.43752422316257217
+        }
+      },
+      "C1": {
+        "intent_accuracy_pct": {
+          "mean": 86.7355304148221,
+          "sample_sd": 0.34548790794729356
+        },
+        "slot_micro_f1_pct": {
+          "mean": 81.19052978458528,
+          "sample_sd": 0.8970224569474249
+        },
+        "selection_score": {
+          "mean": 83.96303009970369,
+          "sample_sd": 0.6020657381706216
+        }
+      }
+    }
+  },
+  "test_evaluated": false,
+  "note": "No configuration change is allowed after this record. Test is evaluated once, on this checkpoint only, in the Stage 2 notebook."
+}

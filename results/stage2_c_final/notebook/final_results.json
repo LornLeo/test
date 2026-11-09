@@ -1,0 +1,111 @@
+{
+  "freeze": {
+    "frozen_at_sgt": "2026-11-08T18:31:43.634287+08:00",
+    "checkpoint": "d_stage2_c_s42_notebook.pt",
+    "checkpoint_sha256": "a729bb74ac548103629bbe81c4c4f5f68a4b95a9e228741d09bd1df54964c4a4",
+    "model_state_sha256": "c183c3395ff6e313954d8393329f43db3161be208b1bb367622e9c7f76a00dce",
+    "selection_freeze_record": "results/stage2_c_final/freeze.json",
+    "training_arguments": {
+      "data": "data/1.0/data/en-US.jsonl",
+      "run_dir": "results/stage2/d_intentcw_s42",
+      "checkpoint": "checkpoints/stage2/d_intentcw_s42.pt",
+      "epochs": 60,
+      "patience": 8,
+      "batch_size": 64,
+      "embedding_dim": 100,
+      "hidden_dim": 128,
+      "layers": 1,
+      "dropout": 0.3,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05,
+      "slot_weight": 2.0,
+      "min_frequency": 1,
+      "word_vectors": "embeddings/glove_train_100.txt",
+      "freeze_embeddings": false,
+      "char_features": true,
+      "decoder": "crf",
+      "word_dropout": 0.1,
+      "intent_pooling": "mean_max",
+      "char_channels": 64,
+      "extra_word_vectors": null,
+      "extra_words": 0,
+      "intent_class_weights": true,
+      "seed": 42,
+      "device": "cpu",
+      "threads": 2,
+      "cuda_memory_fraction": 0.0,
+      "resume": null
+    },
+    "representative_seed": 42,
+    "best_epoch": 49,
+    "epochs_run": 57,
+    "dev_metrics": {
+      "intent_accuracy_pct": 86.7683226758485,
+      "slot_micro_f1_pct": 81.80904522613065,
+      "slot_tp": 1628,
+      "slot_fp": 340,
+      "slot_fn": 384
+    },
+    "selection_rule": "Mean of Dev intent accuracy and exact-span slot micro-F1",
+    "test_used_for_selection": false
+  },
+  "summary": {
+    "model_version": "B joint BiLSTM",
+    "split": "dev",
+    "parameters": {
+      "total": 907002,
+      "trainable": 907002
+    },
+    "best_epoch": 49,
+    "epochs_run": 57,
+    "selection_score": 84.28868395098957,
+    "dev_metrics": {
+      "intent_accuracy_pct": 86.7683226758485,
+      "slot_micro_f1_pct": 81.80904522613065,
+      "slot_tp": 1628,
+      "slot_fp": 340,
+      "slot_fn": 384
+    },
+    "checkpoint": "C:\\Users\\14246\\OneDrive\\Desktop\\4002\\checkpoints\\stage2_c\\d_stage2_c_s42_notebook.pt",
+    "checkpoint_sha256": "a729bb74ac548103629bbe81c4c4f5f68a4b95a9e228741d09bd1df54964c4a4",
+    "elapsed_seconds": 3652.525100400002,
+    "reload_verified": true,
+    "test_evaluated": false
+  },
+  "dev": {
+    "split": "dev",
+    "intent_accuracy_pct": 86.7683226758485,
+    "slot_micro_f1_pct": 81.80904522613065,
+    "slot_tp": 1628,
+    "slot_fp": 340,
+    "slot_fn": 384,
+    "parameters": {
+      "total": 907002,
+      "trainable": 907002
+    },
+    "best_epoch": 49,
+    "checkpoint": "C:\\Users\\14246\\OneDrive\\Desktop\\4002\\checkpoints\\stage2_c\\d_stage2_c_s42_notebook.pt",
+    "checkpoint_sha256": "a729bb74ac548103629bbe81c4c4f5f68a4b95a9e228741d09bd1df54964c4a4",
+    "frozen_for_test": false,
+    "num_examples": 2033,
+    "torch": "2.9.1+cpu"
+  },
+  "test": {
+    "split": "test",
+    "intent_accuracy_pct": 85.57498318762609,
+    "slot_micro_f1_pct": 78.58574813194824,
+    "slot_tp": 2156,
+    "slot_fp": 516,
+    "slot_fn": 659,
+    "parameters": {
+      "total": 907002,
+      "trainable": 907002
+    },
+    "best_epoch": 49,
+    "checkpoint": "C:\\Users\\14246\\OneDrive\\Desktop\\4002\\checkpoints\\stage2_c\\d_stage2_c_s42_notebook.pt",
+    "checkpoint_sha256": "a729bb74ac548103629bbe81c4c4f5f68a4b95a9e228741d09bd1df54964c4a4",
+    "frozen_for_test": true,
+    "num_examples": 2974,
+    "torch": "2.9.1+cpu"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "freeze": {
+    "frozen_at_sgt": "2026-11-02T16:59:34.301046+08:00",
+    "checkpoint": "/var/folders/p8/r57jqjl13p5_6s2y1_hfv09r0000gn/T/sc4002-b-notebook-p0rrbn3x/checkpoints/b_training.pt",
+    "checkpoint_sha256": "1aaa3014264d01fe8ddca85fbde15af7ca6641095a80b0a7ab4ad2e8f286dfda",
+    "model_state_sha256": "59f65ef4c5882be579afdca06037b2cd3c4c3b147308cee2502f05e03d692327",
+    "reference_model_state_sha256": "59f65ef4c5882be579afdca06037b2cd3c4c3b147308cee2502f05e03d692327",
+    "reference_model_match": true,
+    "data_sha256": "c70f75c6a543a26e249ec383df67733ad9b1066f6c0406c2e04a3f03356e407e",
+    "training_arguments": {
+      "data": "/private/tmp/sc4002-final-b-resources-20261102/data/1.0/data/en-US.jsonl",
+      "run_dir": "/var/folders/p8/r57jqjl13p5_6s2y1_hfv09r0000gn/T/sc4002-b-notebook-p0rrbn3x/results/b_training",
+      "checkpoint": "/var/folders/p8/r57jqjl13p5_6s2y1_hfv09r0000gn/T/sc4002-b-notebook-p0rrbn3x/checkpoints/b_training.pt",
+      "epochs": 60,
+      "patience": 8,
+      "batch_size": 64,
+      "embedding_dim": 100,
+      "hidden_dim": 128,
+      "layers": 1,
+      "dropout": 0.3,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05,
+      "slot_weight": 2.0,
+      "min_frequency": 1,
+      "word_vectors": "/var/folders/p8/r57jqjl13p5_6s2y1_hfv09r0000gn/T/sc4002-b-notebook-p0rrbn3x/embeddings/glove_train_100.txt",
+      "freeze_embeddings": false,
+      "char_features": true,
+      "decoder": "crf",
+      "word_dropout": 0.1,
+      "intent_pooling": "mean_max",
+      "seed": 42,
+      "device": "cpu",
+      "threads": 2,
+      "cuda_memory_fraction": 0.0,
+      "resume": null
+    },
+    "representative_seed": 42,
+    "best_epoch": 51,
+    "epochs_run": 59,
+    "dev_metrics": {
+      "intent_accuracy_pct": 87.16182980816528,
+      "slot_micro_f1_pct": 80.87900985097247,
+      "slot_tp": 1601,
+      "slot_fp": 346,
+      "slot_fn": 411
+    },
+    "selection_rule": "Mean of Dev intent accuracy and exact-span slot micro-F1",
+    "test_used_for_selection": false
+  },
+  "summary": {
+    "model_version": "B joint BiLSTM",
+    "split": "dev",
+    "parameters": {
+      "total": 907002,
+      "trainable": 907002
+    },
+    "best_epoch": 51,
+    "epochs_run": 59,
+    "selection_score": 84.02041982956888,
+    "dev_metrics": {
+      "intent_accuracy_pct": 87.16182980816528,
+      "slot_micro_f1_pct": 80.87900985097247,
+      "slot_tp": 1601,
+      "slot_fp": 346,
+      "slot_fn": 411
+    },
+    "checkpoint": "/var/folders/p8/r57jqjl13p5_6s2y1_hfv09r0000gn/T/sc4002-b-notebook-p0rrbn3x/checkpoints/b_training.pt",
+    "checkpoint_sha256": "1aaa3014264d01fe8ddca85fbde15af7ca6641095a80b0a7ab4ad2e8f286dfda",
+    "elapsed_seconds": 850.6283802500693,
+    "reload_verified": true,
+    "test_evaluated": false
+  },
+  "dev": {
+    "split": "dev",
+    "intent_accuracy_pct": 87.16182980816528,
+    "slot_micro_f1_pct": 80.87900985097247,
+    "slot_tp": 1601,
+    "slot_fp": 346,
+    "slot_fn": 411,
+    "parameters": {
+      "total": 907002,
+      "trainable": 907002
+    },
+    "best_epoch": 51,
+    "checkpoint": "/var/folders/p8/r57jqjl13p5_6s2y1_hfv09r0000gn/T/sc4002-b-notebook-p0rrbn3x/checkpoints/b_training.pt",
+    "checkpoint_sha256": "1aaa3014264d01fe8ddca85fbde15af7ca6641095a80b0a7ab4ad2e8f286dfda",
+    "frozen_for_test": false,
+    "num_examples": 2033,
+    "torch": "2.9.1"
+  },
+  "test": {
+    "split": "test",
+    "intent_accuracy_pct": 86.28110289172831,
+    "slot_micro_f1_pct": 78.00875273522976,
+    "slot_tp": 2139,
+    "slot_fp": 530,
+    "slot_fn": 676,
+    "parameters": {
+      "total": 907002,
+      "trainable": 907002
+    },
+    "best_epoch": 51,
+    "checkpoint": "/var/folders/p8/r57jqjl13p5_6s2y1_hfv09r0000gn/T/sc4002-b-notebook-p0rrbn3x/checkpoints/b_training.pt",
+    "checkpoint_sha256": "1aaa3014264d01fe8ddca85fbde15af7ca6641095a80b0a7ab4ad2e8f286dfda",
+    "frozen_for_test": true,
+    "num_examples": 2974,
+    "torch": "2.9.1"
+  }
+}

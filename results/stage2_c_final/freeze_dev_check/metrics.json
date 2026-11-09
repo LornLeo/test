@@ -1,0 +1,18 @@
+{
+  "split": "dev",
+  "intent_accuracy_pct": 86.7683226758485,
+  "slot_micro_f1_pct": 81.80904522613065,
+  "slot_tp": 1628,
+  "slot_fp": 340,
+  "slot_fn": 384,
+  "parameters": {
+    "total": 907002,
+    "trainable": 907002
+  },
+  "best_epoch": 49,
+  "checkpoint": "checkpoints\\stage2_c\\d_intentcw_s42_compat.pt",
+  "checkpoint_sha256": "b8c9b0977adc99eb91361c7ced1914f6cbaa5a898c98bcfd54b79c44c3bf5119",
+  "frozen_for_test": false,
+  "num_examples": 2033,
+  "torch": "2.9.1+cpu"
+}

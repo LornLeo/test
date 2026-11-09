@@ -1,0 +1,18 @@
+{
+  "split": "dev",
+  "intent_accuracy_pct": 87.16182980816528,
+  "slot_micro_f1_pct": 80.87900985097247,
+  "slot_tp": 1601,
+  "slot_fp": 346,
+  "slot_fn": 411,
+  "parameters": {
+    "total": 907002,
+    "trainable": 907002
+  },
+  "best_epoch": 51,
+  "checkpoint": "checkpoints/b_final_weight2.pt",
+  "checkpoint_sha256": "1fa85d383398442053f1e5dbfad6bf3ce9b1a8d0f422167d73831d8dd6319b31",
+  "frozen_for_test": false,
+  "num_examples": 2033,
+  "torch": "2.9.1"
+}

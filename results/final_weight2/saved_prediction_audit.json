@@ -1,0 +1,15 @@
+{
+  "status": "pass",
+  "scope": "Arithmetic recomputation from saved predictions; no model loading or inference",
+  "examples": 2974,
+  "correct_intents": 2566,
+  "metrics": {
+    "intent_accuracy_pct": 86.28110289172831,
+    "slot_micro_f1_pct": 78.00875273522976,
+    "slot_tp": 2139,
+    "slot_fp": 530,
+    "slot_fn": 676
+  },
+  "ids_utterances_and_intents_match_official_test": true,
+  "notebook_hash_matches_canonical_record": true
+}

@@ -1,0 +1,13 @@
+{
+  "source_url": "https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-wiki-gigaword-100/glove-wiki-gigaword-100.gz",
+  "source_md5": "40ec481866001177b8cd4cb0df92924f",
+  "source_sha256": "4934d4708bf3d65f28fc984dbbfa18af9cbd2505d166a7258a1a957808559b43",
+  "data_sha256": "c70f75c6a543a26e249ec383df67733ad9b1066f6c0406c2e04a3f03356e407e",
+  "filtered_sha256": "312638824e20c9a60c390818c7169147434e7f94d7d882cc8ac7a20640bbb708",
+  "dimension": 100,
+  "train_vocab_words": 5302,
+  "matched_words": 4918,
+  "coverage_pct": 92.75745001886081,
+  "license": "https://opendatacommons.org/licenses/pddl/1-0/",
+  "note": "Word vectors only; no external labelled task examples or model weights."
+}

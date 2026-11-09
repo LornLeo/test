@@ -1,0 +1,21 @@
+{
+  "status": "pass",
+  "notebook": "main.ipynb",
+  "code_cells": 44,
+  "executed_code_cells": 44,
+  "execution_errors": 0,
+  "unit_tests_passed": 51,
+  "full_training_epochs": 59,
+  "best_epoch": 51,
+  "all_epoch_reference_metrics_exact": true,
+  "pretest_model_tensor_identity": true,
+  "dev_reload_exact": true,
+  "test_examples": 2974,
+  "test_evaluations_in_final_notebook": 1,
+  "source_snapshot_matches_pretest_freeze": true,
+  "notebook_sha256": "8edf9b70433267df94b78f652f3475ab73323ea89dd77a676a350c8ff8de4c30",
+  "executed_notebook_sha256": "ac989fb03e1d003cc922c88241479f6a407ad31ed8265ea600d22bac39ef26cf",
+  "validation_scope": "Completed execution at original_execution_commit; current presentation changes have a separate static audit",
+  "original_execution_commit": "8c845be0149a88b7a84c80f286fd2b0382e16101",
+  "presentation_modified_after_execution": true
+}

@@ -1,0 +1,18 @@
+{
+  "split": "dev",
+  "intent_accuracy_pct": 87.16182980816528,
+  "slot_micro_f1_pct": 80.87900985097247,
+  "slot_tp": 1601,
+  "slot_fp": 346,
+  "slot_fn": 411,
+  "parameters": {
+    "total": 907002,
+    "trainable": 907002
+  },
+  "best_epoch": 51,
+  "checkpoint": "/var/folders/p8/r57jqjl13p5_6s2y1_hfv09r0000gn/T/sc4002-b-notebook-p0rrbn3x/checkpoints/b_training.pt",
+  "checkpoint_sha256": "1aaa3014264d01fe8ddca85fbde15af7ca6641095a80b0a7ab4ad2e8f286dfda",
+  "frozen_for_test": false,
+  "num_examples": 2033,
+  "torch": "2.9.1"
+}

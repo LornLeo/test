@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/private/tmp/sc4002-b-clean-20261102/bin/python",
+    "-m",
+    "ipykernel_launcher",
+    "-f",
+    "{connection_file}"
+  ],
+  "display_name": "SC4002 B",
+  "language": "python"
+}

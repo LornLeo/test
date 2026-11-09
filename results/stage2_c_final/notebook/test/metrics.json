@@ -1,0 +1,18 @@
+{
+  "split": "test",
+  "intent_accuracy_pct": 85.57498318762609,
+  "slot_micro_f1_pct": 78.58574813194824,
+  "slot_tp": 2156,
+  "slot_fp": 516,
+  "slot_fn": 659,
+  "parameters": {
+    "total": 907002,
+    "trainable": 907002
+  },
+  "best_epoch": 49,
+  "checkpoint": "C:\\Users\\14246\\OneDrive\\Desktop\\4002\\checkpoints\\stage2_c\\d_stage2_c_s42_notebook.pt",
+  "checkpoint_sha256": "a729bb74ac548103629bbe81c4c4f5f68a4b95a9e228741d09bd1df54964c4a4",
+  "frozen_for_test": true,
+  "num_examples": 2974,
+  "torch": "2.9.1+cpu"
+}

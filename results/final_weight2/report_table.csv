@@ -1,0 +1,3 @@
+Model version,Split,Total parameters,Trainable parameters,Intent accuracy (%),Slot micro-F1 (%),Epochs run,Best epoch
+B weight-2 joint model,dev,907002,907002,87.16,80.88,59,51
+B weight-2 joint model,test,907002,907002,86.28,78.01,59,51

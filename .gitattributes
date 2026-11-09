@@ -1,0 +1,2 @@
+# Keep CSV values unchanged while normalizing platform-specific line endings.
+*.csv text eol=lf

@@ -1,0 +1,368 @@
+{
+  "split": "dev",
+  "checkpoint": "checkpoints/b_glove100_char_crf_wd_slot2_s42.pt",
+  "metrics": {
+    "intent_accuracy_pct": 87.16182980816528,
+    "slot_micro_f1_pct": 80.87900985097247,
+    "slot_tp": 1601,
+    "slot_fp": 346,
+    "slot_fn": 411
+  },
+  "unknown_word_subsets": {
+    "has_unknown_word": {
+      "examples": 364,
+      "intent_accuracy_pct": 75.82417582417582,
+      "slot_micro_f1_pct": 64.76190476190476,
+      "slot_tp": 238,
+      "slot_fp": 100,
+      "slot_fn": 159
+    },
+    "all_known_words": {
+      "examples": 1669,
+      "intent_accuracy_pct": 89.6345116836429,
+      "slot_micro_f1_pct": 84.55334987593052,
+      "slot_tp": 1363,
+      "slot_fp": 246,
+      "slot_fn": 252
+    }
+  },
+  "false_positive_categories": {
+    "same_type_overlapping_boundary_error": 101,
+    "other_false_positive": 179,
+    "correct_boundary_wrong_type": 66
+  },
+  "raw_illegal_bio_transitions": 2477,
+  "decoded_illegal_bio_transitions_before_span_repair": 0,
+  "error_cases": [
+    {
+      "id": "24",
+      "utt": "make a room darker",
+      "gold": {
+        "id": "24",
+        "intent": "iot_hue_lightdim",
+        "slots": [
+          {
+            "type": "house_place",
+            "start": 7,
+            "end": 11,
+            "text": "room"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "24",
+        "intent": "iot_hue_lightup",
+        "slots": [
+          {
+            "type": "house_place",
+            "start": 7,
+            "end": 11,
+            "text": "room"
+          }
+        ]
+      },
+      "has_unknown_word": false
+    },
+    {
+      "id": "30",
+      "utt": "cleaning is good dust is so bad do now your magic clean my carpet",
+      "gold": {
+        "id": "30",
+        "intent": "iot_cleaning",
+        "slots": [
+          {
+            "type": "house_place",
+            "start": 59,
+            "end": 65,
+            "text": "carpet"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "30",
+        "intent": "general_quirky",
+        "slots": []
+      },
+      "has_unknown_word": false
+    },
+    {
+      "id": "42",
+      "utt": "give me the status on my available memory",
+      "gold": {
+        "id": "42",
+        "intent": "general_quirky",
+        "slots": []
+      },
+      "prediction": {
+        "id": "42",
+        "intent": "calendar_query",
+        "slots": []
+      },
+      "has_unknown_word": true
+    },
+    {
+      "id": "67",
+      "utt": "i'd like to hear queen's barcelona",
+      "gold": {
+        "id": "67",
+        "intent": "play_music",
+        "slots": [
+          {
+            "type": "artist_name",
+            "start": 17,
+            "end": 24,
+            "text": "queen's"
+          },
+          {
+            "type": "song_name",
+            "start": 25,
+            "end": 34,
+            "text": "barcelona"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "67",
+        "intent": "play_music",
+        "slots": [
+          {
+            "type": "song_name",
+            "start": 17,
+            "end": 34,
+            "text": "queen's barcelona"
+          }
+        ]
+      },
+      "has_unknown_word": true
+    },
+    {
+      "id": "90",
+      "utt": "what's with my dinner order",
+      "gold": {
+        "id": "90",
+        "intent": "takeaway_query",
+        "slots": []
+      },
+      "prediction": {
+        "id": "90",
+        "intent": "takeaway_query",
+        "slots": [
+          {
+            "type": "food_type",
+            "start": 15,
+            "end": 21,
+            "text": "dinner"
+          }
+        ]
+      },
+      "has_unknown_word": false
+    },
+    {
+      "id": "99",
+      "utt": "what's the weeks forecast",
+      "gold": {
+        "id": "99",
+        "intent": "weather_query",
+        "slots": [
+          {
+            "type": "time",
+            "start": 11,
+            "end": 16,
+            "text": "weeks"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "99",
+        "intent": "weather_query",
+        "slots": []
+      },
+      "has_unknown_word": false
+    },
+    {
+      "id": "109",
+      "utt": "put on cannibal queen",
+      "gold": {
+        "id": "109",
+        "intent": "play_music",
+        "slots": [
+          {
+            "type": "song_name",
+            "start": 7,
+            "end": 21,
+            "text": "cannibal queen"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "109",
+        "intent": "play_radio",
+        "slots": [
+          {
+            "type": "artist_name",
+            "start": 7,
+            "end": 21,
+            "text": "cannibal queen"
+          }
+        ]
+      },
+      "has_unknown_word": true
+    },
+    {
+      "id": "113",
+      "utt": "loop this track",
+      "gold": {
+        "id": "113",
+        "intent": "music_settings",
+        "slots": [
+          {
+            "type": "player_setting",
+            "start": 0,
+            "end": 4,
+            "text": "loop"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "113",
+        "intent": "music_settings",
+        "slots": []
+      },
+      "has_unknown_word": false
+    },
+    {
+      "id": "115",
+      "utt": "set the volume to low",
+      "gold": {
+        "id": "115",
+        "intent": "audio_volume_down",
+        "slots": [
+          {
+            "type": "change_amount",
+            "start": 15,
+            "end": 21,
+            "text": "to low"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "115",
+        "intent": "audio_volume_up",
+        "slots": [
+          {
+            "type": "change_amount",
+            "start": 15,
+            "end": 21,
+            "text": "to low"
+          }
+        ]
+      },
+      "has_unknown_word": false
+    },
+    {
+      "id": "237",
+      "utt": "did i set an alarm to wake up in the morning",
+      "gold": {
+        "id": "237",
+        "intent": "alarm_query",
+        "slots": [
+          {
+            "type": "alarm_type",
+            "start": 22,
+            "end": 29,
+            "text": "wake up"
+          },
+          {
+            "type": "timeofday",
+            "start": 37,
+            "end": 44,
+            "text": "morning"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "237",
+        "intent": "alarm_query",
+        "slots": [
+          {
+            "type": "timeofday",
+            "start": 37,
+            "end": 44,
+            "text": "morning"
+          }
+        ]
+      },
+      "has_unknown_word": false
+    },
+    {
+      "id": "295",
+      "utt": "tell me today's newspaper's headlines",
+      "gold": {
+        "id": "295",
+        "intent": "news_query",
+        "slots": [
+          {
+            "type": "date",
+            "start": 8,
+            "end": 15,
+            "text": "today's"
+          },
+          {
+            "type": "media_type",
+            "start": 16,
+            "end": 27,
+            "text": "newspaper's"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "295",
+        "intent": "news_query",
+        "slots": [
+          {
+            "type": "date",
+            "start": 8,
+            "end": 15,
+            "text": "today's"
+          },
+          {
+            "type": "news_topic",
+            "start": 16,
+            "end": 27,
+            "text": "newspaper's"
+          }
+        ]
+      },
+      "has_unknown_word": true
+    },
+    {
+      "id": "298",
+      "utt": "play chopin",
+      "gold": {
+        "id": "298",
+        "intent": "play_music",
+        "slots": [
+          {
+            "type": "artist_name",
+            "start": 5,
+            "end": 11,
+            "text": "chopin"
+          }
+        ]
+      },
+      "prediction": {
+        "id": "298",
+        "intent": "play_music",
+        "slots": [
+          {
+            "type": "music_genre",
+            "start": 5,
+            "end": 11,
+            "text": "chopin"
+          }
+        ]
+      },
+      "has_unknown_word": true
+    }
+  ]
+}
