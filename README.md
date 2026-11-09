@@ -7,7 +7,7 @@ This branch holds the Stage 2 report and the code to run both systems:
 | `report/` | **Part C updated report** (`.md` and `.docx`): the AI analysis, the baseline and improved pipelines, the experiments, the results table, error analysis, limitations, lessons learned and the design sweep |
 | `src/`, `tests/` | Code for the joint BiLSTM-CRF used by both systems. Stage 1 is the default; Stage 2 adds one option, `--intent-class-weights` |
 | `scripts/` | The Stage 2 experiment, analysis, freeze and notebook scripts, plus GloVe preparation |
-| `notebooks/` | Executed evidence: `B_joint_training.ipynb` (Stage 1 baseline) and `D_stage2.ipynb` (Stage 2: training log, curves, reload, single Test result) |
+| `notebooks/` | Executed evidence: `B_joint_training.ipynb` (Stage 1 baseline), `D_stage2.ipynb` (Stage 2: training log, curves, reload, single Test result) and `D_experiment_log.ipynb` (every other Stage 2 run, Dev only) |
 | `artifacts/checkpoints/b_weight2_inference.pt` | The frozen Stage 1 model, used to check the baseline |
 | `results/` | Saved Dev results of every run, the freeze records and the final Dev/Test results |
 
@@ -21,6 +21,45 @@ This branch holds the Stage 2 report and the code to run both systems:
 | Stage-2 system | Test | Same as above | Same as above | 85.57 | 78.59 | Same as above |
 
 Stage 2 adds class-weighted intent loss (Role C's proposal C1). It matches Stage 1 overall: on Test it is 0.71 points lower on intent and 0.58 points higher on slot F1. The report explains why.
+
+## For E: putting Stage 2 into `main.ipynb`
+
+1. **Where it goes.** After the end of the Stage 1 section (B's final Test evaluation), paste:
+   - first, all cells of `notebooks/D_stage2.ipynb`;
+   - then, all cells of `notebooks/D_experiment_log.ipynb`.
+
+   If Stage 1 is the last section of `main.ipynb`, this appends both with their outputs:
+   ```python
+   import nbformat
+   main = nbformat.read("main.ipynb", as_version=4)
+   for path in ("notebooks/D_stage2.ipynb", "notebooks/D_experiment_log.ipynb"):
+       main.cells += nbformat.read(path, as_version=4).cells
+   nbformat.write(main, "main.ipynb")
+   ```
+2. **Keep the outputs, and don't re-run the Stage 2 cells.**
+   - The outputs are the evidence: training log, curves, reload check and the Test result.
+   - Re-running retrains the model, which takes about 60 minutes.
+   - Never clear outputs before submission. The assignment gives zero marks for cleared outputs or typed scores.
+3. **Test is evaluated once only.**
+   - The final Stage 2 cell refuses to evaluate Test again while `results/stage2_c_final/notebook/` exists.
+   - A re-run would replace the real result with an error.
+4. **There are two copies of the code, on purpose.**
+   - The Stage 1 section keeps B's source.
+   - The Stage 2 section writes its own snapshot of the source into a new temporary folder, and clears any cached `src` modules before importing it, so the two never mix.
+   - Stage 2's snapshot adds `src/model/stage2.py` and an updated `train.py`, whose defaults are still the Stage 1 recipe.
+5. **The experiment log is self-contained.**
+   - It holds the saved Dev files of every run (with their SHA-256 hashes), so it works in `main.ipynb` without the `results/` folder.
+   - It retrains nothing and never reads Test, so re-running it is safe and takes seconds.
+   - It will be rebuilt once the design sweep finishes, so take the latest version from this branch.
+6. **Where each report number is printed.**
+
+   | Report number | Printed by |
+   |---|---|
+   | Stage 1 results-table rows | The Stage 1 section |
+   | Stage 2 results-table rows | The final cell of `D_stage2.ipynb` |
+   | 3-seed comparison, C2, per-class diagnostics, design sweep | `D_experiment_log.ipynb` |
+
+7. **Packaging.** `Group_<ID>.zip` contains only `main.ipynb`, `ai_collaboration.md` and `report.pdf`.
 
 ## What I did for Stage 2, step by step
 
@@ -131,6 +170,14 @@ MAX_JOBS=8 bash scripts/d_sweep_runs.sh all          # 21 runs: depth 2-3, width
 ```
 
 The runs started 2026-11-09 19:15 SGT. Report Section 8 will be filled in when they finish.
+
+### Step 9. Build the experiment log
+
+```bash
+.venv/Scripts/python.exe -m scripts.d_build_experiment_log   # notebooks/D_experiment_log.ipynb
+```
+
+It embeds the saved Dev files of every Stage 2 run and executes the log. It is rebuilt after the sweep, so the sweep section is filled in.
 
 ## Not included
 
