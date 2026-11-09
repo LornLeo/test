@@ -198,7 +198,7 @@ def main():
     width = {k: describe(*v) for k, v in WIDTH.items()}
     ablation = {k: describe(*v) for k, v in ABLATION.items()}
     result = {
-        "note": "Dev only; Test never read. Rules in docs/D_SWEEP_PLAN.md. "
+        "note": "Dev only; Test never read. Rules in report Section 8. "
         "Frozen Stage 1 and Stage 2 systems are not changed.",
         "depth": {"by_layers": depth, "rule2": choose(depth, 1)},
         "width": {"by_hidden_dim": width, "rule2": choose(width, 128)},

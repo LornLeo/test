@@ -348,7 +348,7 @@ C's proposals were tested as planned and did not improve the model overall: Stag
 
 ## 8. Design sensitivity sweep: BiLSTM depth, width and component checks
 
-**Status: runs in progress (started 2026-11-09 19:15 SGT).** This section will report the results once the 21 runs finish.
+**Status: complete.** The 21 runs ran from 2026-11-09 19:15 to 2026-11-10 01:30 SGT. Every number below is printed by Section 3 of the experiment log.
 
 A review of this analysis asked two questions: why the model uses one BiLSTM layer of width 128, and whether the character-CNN and word-dropout gains (seed 42 only, Section 2.3) hold on more seeds. The sweep answers both on Dev only. It does not change the frozen Stage 1 or Stage 2 systems, and Test is not used.
 
@@ -364,3 +364,72 @@ A review of this analysis asked two questions: why the model uses one BiLSTM lay
 - **Components:** the full model is compared seed by seed with the model without that component. "Consistent gain" means the full model scores higher on all three seeds, "average gain only" means only the mean is higher, and "no gain" means the mean is not higher. The same labels compare the full model with "neither".
 - **Reporting:** each setting's 3-seed mean and SD of the selection score, intent accuracy and slot F1, with its parameter count and training time. SDs describe spread only.
 - **No reselection:** nothing found here changes either frozen system, and Test is not evaluated for any sweep run.
+
+In the tables below, each score is the 3-seed mean on Dev, with the sample SD in brackets. Minutes are the mean training time per seed. Epochs are best / run for seeds 42, 43 and 44.
+
+### 8.1 Depth
+
+| Layers | Parameters | Selection score | Intent accuracy (%) | Slot F1 (%) | Minutes | Epochs |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| **1 (current)** | 907,002 | 83.96 (0.44) | 87.18 (0.35) | 80.73 (0.54) | 70 | 38/46, 36/44, 37/45 |
+| 2 | 1,302,266 | 83.98 (0.32) | 86.85 (0.38) | 81.11 (0.27) | 145 | 30/38, 38/46, 46/54 |
+| 3 | 1,697,530 | 83.32 (0.14) | 86.33 (0.42) | 80.31 (0.32) | 172 | 60/60, 40/48, 33/41 |
+
+![Figure 8.1: Dev selection score by BiLSTM depth](../results/role_d/sweep_depth.png)
+
+**Why we keep one layer.**
+- Two layers have the best mean, 83.98. That is only 0.02 points above one layer, far inside the 0.44-point margin, so the rule prefers the smaller 1-layer model.
+- A second layer trades 0.33 points of intent accuracy for 0.38 points of slot F1. It adds 44% more parameters.
+- Three layers are worse on every metric. Extra depth does not help on this dataset.
+
+### 8.2 Width
+
+| Hidden size per direction | Parameters | Selection score | Intent accuracy (%) | Slot F1 (%) | Minutes | Epochs |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 64 | 694,138 | 83.16 (0.40) | 86.62 (0.49) | 79.69 (0.49) | 98 | 40/48, 33/41, 30/38 |
+| **128 (current)** | 907,002 | 83.96 (0.44) | 87.18 (0.35) | 80.73 (0.54) | 70 | 38/46, 36/44, 37/45 |
+| 256 | 1,529,338 | 84.39 (0.03) | 87.15 (0.08) | 81.63 (0.04) | 136 | 30/38, 46/54, 40/48 |
+
+![Figure 8.2: Dev selection score by BiLSTM width](../results/role_d/sweep_width.png)
+
+**Why we keep width 128.**
+- Width 256 has the best mean, 84.39, and is very stable across seeds (SD 0.03).
+- It is 0.43 points above width 128. The margin is width 128's SD of 0.44, so 128 is still supported, and the rule prefers it as the smaller model.
+- This is a near call. Width 256 gains on slot F1 (+0.90) but not on intent accuracy (−0.03), and needs 69% more parameters.
+- Width 64 is 0.80 points below 128, beyond the margin, so 128 is not larger than it needs to be.
+- Width 256 is the most promising change for future work. It is not adopted here, because the rules fixed before the runs do not allow reselection.
+
+### 8.3 Character CNN and word dropout
+
+| Model | Parameters | Selection score | Intent accuracy (%) | Slot F1 (%) | Minutes | Epochs |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| **Full model (current)** | 907,002 | 83.96 (0.44) | 87.18 (0.35) | 80.73 (0.54) | 70 | 38/46, 36/44, 37/45 |
+| No character CNN | 837,770 | 83.80 (0.18) | 87.08 (0.06) | 80.53 (0.31) | 117 | 44/52, 31/39, 54/60 |
+| No word dropout | 907,002 | 82.87 (0.57) | 85.90 (0.87) | 79.84 (0.34) | 108 | 35/43, 31/39, 32/40 |
+| Neither | 837,770 | 82.25 (0.59) | 85.42 (0.55) | 79.08 (0.81) | 92 | 24/32, 43/51, 22/30 |
+
+Gain of the full model in selection-score points (positive means the full model is better):
+
+| Comparison | Seed 42 | Seed 43 | Seed 44 | Mean | Verdict |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Full model vs no character CNN | −0.28 | +0.34 | +0.40 | +0.15 | Average gain only |
+| Full model vs no word dropout | +0.27 | +1.75 | +1.23 | +1.08 | Consistent gain |
+| Full model vs neither | +1.22 | +2.32 | +1.57 | +1.70 | Consistent gain |
+
+![Figure 8.3: Dev selection score with and without the character CNN and word dropout](../results/role_d/sweep_ablation.png)
+
+**What this shows.**
+- Word dropout is the component that matters. Removing it lowers the score on every seed, by 1.08 points on average, mostly through intent accuracy (−1.28).
+- The character CNN's gain is small and not consistent. It helps on seeds 43 and 44 but not on seed 42.
+- Together, the two components beat neither on all three seeds (+1.70).
+- This refines the seed-42 result in Section 2.3. The combined gain holds on more seeds, but most of it comes from word dropout.
+
+### 8.4 Caveats
+
+- **Epoch cap.** Two runs reached the 60-epoch cap before early stopping: 3 layers on seed 42 (best epoch 60, so still improving) and no character CNN on seed 44 (best epoch 54). Their scores may be slightly low.
+  - For 3 layers to match one layer's mean, seed 42 would need about 1.9 more points, which is unlikely from a few more epochs.
+  - A higher score without the character CNN would only weaken the character CNN's gain further.
+- **Training time.** The sweep runs shared the CPU eight at a time, so their minutes are longer than R's for reasons unrelated to model size; width 64, for example, took longer than width 128. Parameter counts are the better guide to cost.
+- **Three seeds.** The SDs are rough, and the width-256 decision falls within 0.01 points of the margin.
+
+**Conclusion.** On Dev, the fixed rules support one BiLSTM layer of width 128. Width 256 is a near tie and the best candidate for future work. Word dropout's gain holds on all three seeds; the character CNN's does not. Neither frozen system changes.

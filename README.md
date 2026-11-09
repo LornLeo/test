@@ -51,7 +51,7 @@ Stage 2 adds class-weighted intent loss (Role C's proposal C1). It matches Stage
 5. **The experiment log is self-contained.**
    - It holds the saved Dev files of every run (with their SHA-256 hashes), so it works in `main.ipynb` without the `results/` folder.
    - It retrains nothing and never reads Test, so re-running it is safe and takes seconds.
-   - It will be rebuilt once the design sweep finishes, so take the latest version from this branch.
+   - It includes the finished design sweep (21 runs), so the version on this branch is final.
 6. **Where each report number is printed.**
 
    | Report number | Printed by |
@@ -161,7 +161,7 @@ I compared the frozen Stage 2 model's Dev predictions with Stage 1's.
 - Stage 2 fixed 27 intent errors but made 35 new ones, 12 of them on `general_quirky`.
 - Three genuine Stage 2 errors are analysed in report Section 5.4.
 
-### Step 8. Design sensitivity sweep (in progress)
+### Step 8. Design sensitivity sweep
 
 A review asked why the model uses 1 BiLSTM layer of width 128, and whether the character-CNN and word-dropout gains hold beyond seed 42. This is a Dev-only check; it does not change either frozen system.
 
@@ -170,7 +170,10 @@ MAX_JOBS=8 bash scripts/d_sweep_runs.sh all          # 21 runs: depth 2-3, width
 .venv/Scripts/python.exe -m scripts.d_sweep_analysis # results/role_d/sweep_analysis.json and three plots
 ```
 
-The runs started 2026-11-09 19:15 SGT. Report Section 8 will be filled in when they finish.
+The runs ran from 2026-11-09 19:15 to 2026-11-10 01:30 SGT. Each run folder in `results/sweep/` holds the same files as in Step 4. Results (report Section 8):
+- **Depth:** 1 layer is kept. 2 layers are only 0.02 points better on the mean, and 3 layers are worse.
+- **Width:** 128 is kept. 256 is 0.43 points better, just inside the 0.44-point margin, so the rule prefers the smaller model. 64 is clearly worse.
+- **Components:** word dropout helps on all three seeds (+1.08 on average). The character CNN helps on the mean only (+0.15; it is worse on seed 42).
 
 ### Step 9. Build the experiment log
 
@@ -178,7 +181,7 @@ The runs started 2026-11-09 19:15 SGT. Report Section 8 will be filled in when t
 .venv/Scripts/python.exe -m scripts.d_build_experiment_log   # notebooks/D_experiment_log.ipynb
 ```
 
-It embeds the saved Dev files of every Stage 2 run and executes the log. It is rebuilt after the sweep, so the sweep section is filled in.
+It embeds the saved Dev files of every Stage 2 run, including the sweep, and executes the log.
 
 ## Not included
 

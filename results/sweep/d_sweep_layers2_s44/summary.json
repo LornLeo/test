@@ -1,0 +1,23 @@
+{
+  "model_version": "B joint BiLSTM",
+  "split": "dev",
+  "parameters": {
+    "total": 1302266,
+    "trainable": 1302266
+  },
+  "best_epoch": 46,
+  "epochs_run": 54,
+  "selection_score": 84.29876597027294,
+  "dev_metrics": {
+    "intent_accuracy_pct": 87.26020659124447,
+    "slot_micro_f1_pct": 81.3373253493014,
+    "slot_tp": 1630,
+    "slot_fp": 366,
+    "slot_fn": 382
+  },
+  "checkpoint": "checkpoints\\sweep\\d_sweep_layers2_s44.pt",
+  "checkpoint_sha256": "68282d4865b88de9c7a1745b02593e444f2d97487a20a2819f3badfa2b62ac25",
+  "elapsed_seconds": 10041.396332000004,
+  "reload_verified": true,
+  "test_evaluated": false
+}

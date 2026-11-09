@@ -309,10 +309,10 @@ def build():
         code(PER_CLASS),
         md(
             "## 3. Design sensitivity sweep\n\n"
-            "Dev only; it does not change the frozen Stage 1 or Stage 2 systems. The preferred "
-            "depth or width is the best 3-seed mean, unless a smaller model is within one seed SD "
-            "of it. A component has a consistent gain if removing it lowers the score on all "
-            "three seeds."
+            "Dev only; it does not change the frozen Stage 1 or Stage 2 systems. A depth or "
+            "width counts as within reach of the best 3-seed mean if it is no further below it "
+            "than the larger of the two seed SDs; the smallest such model is preferred. A "
+            "component has a consistent gain if removing it lowers the score on all three seeds."
         ),
         code(SWEEP),
     ]

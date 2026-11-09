@@ -1,0 +1,43 @@
+{"arguments": {"data": "data/1.0/data/en-US.jsonl", "run_dir": "results/sweep/d_sweep_hidden256_s42", "checkpoint": "checkpoints/sweep/d_sweep_hidden256_s42.pt", "epochs": 60, "patience": 8, "batch_size": 64, "embedding_dim": 100, "hidden_dim": 256, "layers": 1, "dropout": 0.3, "learning_rate": 0.001, "weight_decay": 1e-05, "slot_weight": 2.0, "min_frequency": 1, "word_vectors": "embeddings/glove_train_100.txt", "freeze_embeddings": false, "char_features": true, "decoder": "crf", "word_dropout": 0.1, "intent_pooling": "mean_max", "intent_class_weights": false, "seed": 42, "device": "cpu", "threads": 2, "cuda_memory_fraction": 0.0, "resume": null}, "model": {"vocab_size": 5304, "num_intents": 60, "num_tags": 111, "embedding_dim": 100, "hidden_dim": 256, "num_layers": 1, "dropout": 0.3, "freeze_embeddings": false, "char_vocab_size": 35, "char_embedding_dim": 16, "char_channels": 64, "decoder": "crf", "bio_tags": ["O", "B-alarm_type", "I-alarm_type", "B-app_name", "I-app_name", "B-artist_name", "I-artist_name", "B-audiobook_author", "I-audiobook_author", "B-audiobook_name", "I-audiobook_name", "B-business_name", "I-business_name", "B-business_type", "I-business_type", "B-change_amount", "I-change_amount", "B-coffee_type", "I-coffee_type", "B-color_type", "I-color_type", "B-cooking_type", "I-cooking_type", "B-currency_name", "I-currency_name", "B-date", "I-date", "B-definition_word", "I-definition_word", "B-device_type", "I-device_type", "B-drink_type", "I-drink_type", "B-email_address", "I-email_address", "B-email_folder", "I-email_folder", "B-event_name", "I-event_name", "B-food_type", "I-food_type", "B-game_name", "I-game_name", "B-game_type", "I-game_type", "B-general_frequency", "I-general_frequency", "B-house_place", "I-house_place", "B-ingredient", "I-ingredient", "B-joke_type", "I-joke_type", "B-list_name", "I-list_name", "B-meal_type", "I-meal_type", "B-media_type", "I-media_type", "B-movie_name", "I-movie_name", "B-movie_type", "I-movie_type", "B-music_album", "I-music_album", "B-music_descriptor", "I-music_descriptor", "B-music_genre", "I-music_genre", "B-news_topic", "I-news_topic", "B-order_type", "I-order_type", "B-person", "I-person", "B-personal_info", "I-personal_info", "B-place_name", "I-place_name", "B-player_setting", "I-player_setting", "B-playlist_name", "I-playlist_name", "B-podcast_descriptor", "I-podcast_descriptor", "B-podcast_name", "I-podcast_name", "B-radio_name", "I-radio_name", "B-relation", "I-relation", "B-song_name", "I-song_name", "B-sport_type", "I-sport_type", "B-time", "I-time", "B-time_zone", "I-time_zone", "B-timeofday", "I-timeofday", "B-transport_agency", "I-transport_agency", "B-transport_descriptor", "I-transport_descriptor", "B-transport_name", "I-transport_name", "B-transport_type", "I-transport_type", "B-weather_descriptor", "I-weather_descriptor"], "word_dropout": 0.1, "intent_pooling": "mean_max"}, "parameters": {"total": 1529338, "trainable": 1529338}, "word_vectors": {"matched": 4918, "eligible": 5302, "coverage_pct": 92.75745001886081}, "intent_class_weights": null, "data_sha256": "c70f75c6a543a26e249ec383df67733ad9b1066f6c0406c2e04a3f03356e407e", "selection": "mean of Dev intent_accuracy_pct and slot_micro_f1_pct", "environment": {"python": "3.12.3", "torch": "2.9.1+cpu", "numpy": "2.5.4", "device": "cpu", "platform": "Windows-11-10.0.22631-SP0"}}
+Gold BIO round-trip: Train=11514/11514, Dev=2033/2033
+Parameters: total=1,529,338; trainable=1,529,338; cap=20,000,000
+epoch=01 train_loss=4.8422 dev_loss=2.5733 dev_intent=55.98% dev_slot_F1=38.02% mean=47.00% time=234.4s best_epoch=1
+epoch=02 train_loss=2.2940 dev_loss=1.5674 dev_intent=73.59% dev_slot_F1=60.68% mean=67.13% time=199.9s best_epoch=2
+epoch=03 train_loss=1.6694 dev_loss=1.2331 dev_intent=79.73% dev_slot_F1=68.39% mean=74.06% time=211.7s best_epoch=3
+epoch=04 train_loss=1.3848 dev_loss=1.0942 dev_intent=82.05% dev_slot_F1=73.02% mean=77.53% time=205.5s best_epoch=4
+epoch=05 train_loss=1.1985 dev_loss=1.0134 dev_intent=83.13% dev_slot_F1=75.09% mean=79.11% time=248.7s best_epoch=5
+epoch=06 train_loss=1.0782 dev_loss=0.9664 dev_intent=84.26% dev_slot_F1=75.98% mean=80.12% time=221.5s best_epoch=6
+epoch=07 train_loss=0.9955 dev_loss=0.9414 dev_intent=84.75% dev_slot_F1=76.17% mean=80.46% time=202.9s best_epoch=7
+epoch=08 train_loss=0.8900 dev_loss=0.9144 dev_intent=85.15% dev_slot_F1=77.13% mean=81.14% time=278.1s best_epoch=8
+epoch=09 train_loss=0.8174 dev_loss=0.8951 dev_intent=85.83% dev_slot_F1=78.00% mean=81.92% time=241.1s best_epoch=9
+epoch=10 train_loss=0.7772 dev_loss=0.8900 dev_intent=85.19% dev_slot_F1=77.51% mean=81.35% time=249.7s best_epoch=9
+epoch=11 train_loss=0.7078 dev_loss=0.8952 dev_intent=85.59% dev_slot_F1=78.77% mean=82.18% time=208.5s best_epoch=11
+epoch=12 train_loss=0.6675 dev_loss=0.8806 dev_intent=85.98% dev_slot_F1=78.94% mean=82.46% time=252.6s best_epoch=12
+epoch=13 train_loss=0.6206 dev_loss=0.8825 dev_intent=86.18% dev_slot_F1=79.24% mean=82.71% time=236.6s best_epoch=13
+epoch=14 train_loss=0.5779 dev_loss=0.8663 dev_intent=86.37% dev_slot_F1=79.45% mean=82.91% time=262.1s best_epoch=14
+epoch=15 train_loss=0.5546 dev_loss=0.8932 dev_intent=85.69% dev_slot_F1=80.05% mean=82.87% time=227.5s best_epoch=14
+epoch=16 train_loss=0.5146 dev_loss=0.9138 dev_intent=85.54% dev_slot_F1=79.21% mean=82.37% time=201.9s best_epoch=14
+epoch=17 train_loss=0.5043 dev_loss=0.8761 dev_intent=87.06% dev_slot_F1=80.52% mean=83.79% time=263.4s best_epoch=17
+epoch=18 train_loss=0.4691 dev_loss=0.9010 dev_intent=86.03% dev_slot_F1=80.26% mean=83.15% time=234.6s best_epoch=17
+epoch=19 train_loss=0.4393 dev_loss=0.9150 dev_intent=86.37% dev_slot_F1=79.80% mean=83.09% time=119.8s best_epoch=17
+epoch=20 train_loss=0.4143 dev_loss=0.9153 dev_intent=85.93% dev_slot_F1=80.65% mean=83.29% time=136.0s best_epoch=17
+epoch=21 train_loss=0.3700 dev_loss=0.9005 dev_intent=86.52% dev_slot_F1=80.77% mean=83.64% time=138.7s best_epoch=17
+epoch=22 train_loss=0.3638 dev_loss=0.9113 dev_intent=86.47% dev_slot_F1=80.80% mean=83.64% time=130.5s best_epoch=17
+epoch=23 train_loss=0.3461 dev_loss=0.9059 dev_intent=86.42% dev_slot_F1=81.10% mean=83.76% time=135.7s best_epoch=17
+epoch=24 train_loss=0.3283 dev_loss=0.9027 dev_intent=86.87% dev_slot_F1=80.98% mean=83.92% time=138.9s best_epoch=24
+epoch=25 train_loss=0.3218 dev_loss=0.9178 dev_intent=86.57% dev_slot_F1=81.18% mean=83.87% time=142.0s best_epoch=24
+epoch=26 train_loss=0.3077 dev_loss=0.9085 dev_intent=86.97% dev_slot_F1=81.14% mean=84.05% time=139.4s best_epoch=26
+epoch=27 train_loss=0.2991 dev_loss=0.9169 dev_intent=86.72% dev_slot_F1=81.23% mean=83.97% time=144.9s best_epoch=26
+epoch=28 train_loss=0.2894 dev_loss=0.9222 dev_intent=86.62% dev_slot_F1=80.91% mean=83.77% time=144.6s best_epoch=26
+epoch=29 train_loss=0.2946 dev_loss=0.9324 dev_intent=86.52% dev_slot_F1=81.25% mean=83.89% time=154.5s best_epoch=26
+epoch=30 train_loss=0.2875 dev_loss=0.9247 dev_intent=87.06% dev_slot_F1=81.64% mean=84.35% time=153.3s best_epoch=30
+epoch=31 train_loss=0.2810 dev_loss=0.9241 dev_intent=86.92% dev_slot_F1=81.12% mean=84.02% time=155.8s best_epoch=30
+epoch=32 train_loss=0.2749 dev_loss=0.9202 dev_intent=86.97% dev_slot_F1=81.22% mean=84.09% time=155.2s best_epoch=30
+epoch=33 train_loss=0.2710 dev_loss=0.9218 dev_intent=87.11% dev_slot_F1=81.23% mean=84.17% time=153.3s best_epoch=30
+epoch=34 train_loss=0.2722 dev_loss=0.9208 dev_intent=87.16% dev_slot_F1=80.98% mean=84.07% time=168.7s best_epoch=30
+epoch=35 train_loss=0.2645 dev_loss=0.9184 dev_intent=87.16% dev_slot_F1=81.17% mean=84.17% time=160.5s best_epoch=30
+epoch=36 train_loss=0.2650 dev_loss=0.9228 dev_intent=87.01% dev_slot_F1=81.17% mean=84.09% time=160.2s best_epoch=30
+epoch=37 train_loss=0.2639 dev_loss=0.9263 dev_intent=87.01% dev_slot_F1=81.16% mean=84.09% time=164.1s best_epoch=30
+epoch=38 train_loss=0.2597 dev_loss=0.9233 dev_intent=87.11% dev_slot_F1=81.18% mean=84.15% time=155.0s best_epoch=30
+Early stopping: no Dev selection improvement for 8 epochs
+BEST CHECKPOINT: {"model_version": "B joint BiLSTM", "split": "dev", "parameters": {"total": 1529338, "trainable": 1529338}, "best_epoch": 30, "epochs_run": 38, "selection_score": 84.35061623874248, "dev_metrics": {"intent_accuracy_pct": 87.06345302508608, "slot_micro_f1_pct": 81.63777945239889, "slot_tp": 1625, "slot_fp": 344, "slot_fn": 387}, "checkpoint": "checkpoints\\sweep\\d_sweep_hidden256_s42.pt", "checkpoint_sha256": "eb3435c59579ebdb584da64755c68de9b6a4e622658f3ba6b21b5e7fbf9ca0b5", "elapsed_seconds": 7149.889143400011, "reload_verified": true, "test_evaluated": false}
