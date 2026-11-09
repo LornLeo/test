@@ -150,6 +150,8 @@ The budget for C2 was fixed for every seed before any C2 run, as this plan requi
 
 C2 seed 42 ended at 84.29, exactly C1's score: its first 57 epochs were identical to C1, and epochs 58–61 scored 84.14–84.20 at a learning rate of 1.6e-05 or less. SDs are sample standard deviations over three seeds; they describe spread and are not a significance test.
 
+C1's mean slot F1 is 0.46 points above R's, but not on every seed (+1.65, −0.65 and +0.38, from unrounded values), so it is not credited as a slot improvement. Its mean intent accuracy is 0.44 points lower.
+
 ### 4.4 Per-class diagnostics (C1 minus R, points)
 
 | Seed | Rarest quarter (109 Dev examples) | Most frequent quarter (1,157 Dev examples) | `general_quirky` F1 | `qa_factoid` F1 |
@@ -215,7 +217,17 @@ The Stage 2 system was chosen on Dev by rules fixed before the runs, then frozen
 | C2 gate | C2 seed 42 must beat C1 seed 42 (84.29) | 84.29 at the same best epoch: failed, so no more seeds |
 | Stage 2 configuration | C1, unless C2 passes and has a higher 3-seed mean; a tie goes to C1, the simpler setting | C1 |
 | Submitted checkpoint | Seed 42 of the chosen configuration, fixed before training | `d_intentcw_s42` |
-| Test | Once, after the freeze, on the reproduced checkpoint | 85.57% intent, 78.59% slot F1 |
+| Reporting | Stage 2 is the chosen configuration even if it does not beat Stage 1; seed SDs describe spread only | C1 reported, with no improvement claimed |
+| Test | Once, after the freeze, on the reproduced checkpoint. If the retrained Dev scores or weights differ from the frozen run, the notebook stops before Test and nothing is reselected | Reproduced exactly; 85.57% intent, 78.59% slot F1 |
+
+**When each rule was fixed** (Git commits in the team repository; times in SGT)
+
+| Rule | Commit | Committed | Before |
+| --- | --- | --- | --- |
+| C1 weighting formula and seed-42 gate | `f147e58` | 2026-11-08 14:28 | Any C1 training |
+| C2 gate and the Stage 2 selection rule | `e62acf9` | 2026-11-08 16:29 | Any C2 training |
+| Freeze record (`freeze.json`) | `926c834` | 2026-11-08 17:30 | Any Test evaluation of C1 or C2 |
+| Sweep rules (Section 8) | `dc02b15` | 2026-11-09 19:15 | Any sweep run |
 
 **Frozen model record** (`results/stage2_c_final/freeze.json`, written 2026-11-08 17:30 SGT, before any Test evaluation of C1 or C2)
 
@@ -345,6 +357,9 @@ A review of this analysis asked two questions: why the model uses one BiLSTM lay
 | BiLSTM width (hidden size per direction) | 64, 128, 256 (1 layer) | 42, 43, 44 |
 | Components | full model, no character CNN, no word dropout, neither | 42, 43, 44 |
 
-**Rules, fixed before the runs:**
-- The preferred depth or width is the one with the best 3-seed mean, unless a smaller model is within one seed SD of it, in which case the smaller model is preferred.
-- A component has a "consistent gain" if removing it lowers the score on all three seeds, an "average gain only" if the mean falls but not on every seed, and "no gain" otherwise.
+**Rules, fixed before the runs** (commit `dc02b15`):
+- **Centre point:** the same-machine Stage 1 runs R are the 1-layer, width-128, full-model point, reused rather than retrained. The other 21 runs are new. With 2 or 3 layers, dropout 0.3 is also applied between layers.
+- **Depth and width:** the best value is the one with the highest 3-seed mean selection score. The current setting is *supported* unless another value beats it by more than the larger of the two seed SDs. Among the values within that margin of the best, the smallest model is preferred, because it is cheaper and less prone to overfitting.
+- **Components:** the full model is compared seed by seed with the model without that component. "Consistent gain" means the full model scores higher on all three seeds, "average gain only" means only the mean is higher, and "no gain" means the mean is not higher. The same labels compare the full model with "neither".
+- **Reporting:** each setting's 3-seed mean and SD of the selection score, intent accuracy and slot F1, with its parameter count and training time. SDs describe spread only.
+- **No reselection:** nothing found here changes either frozen system, and Test is not evaluated for any sweep run.
