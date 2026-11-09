@@ -248,6 +248,7 @@ The Stage 2 system was chosen on Dev by rules fixed before the runs, then frozen
 1. **The scope was chosen after seeing results.** Limiting Stage 2 to C's proposals was decided after C1's 3-seed Dev results were known. The C2 gate and the selection rule were committed before C2 ran.
 2. **Selected, not proven better.** C1's 3-seed mean equals the Stage 1 recipe's (+0.01), so the report claims no improvement.
 3. **Different machines.** The reported Stage 1 system was trained on macOS; the fair Dev comparison is with R, trained on the same machine as Stage 2.
+4. **Another candidate was evaluated on Test.** Before the scope was limited to C's proposals, Role D also tried S1 (frozen GloVe vectors for out-of-Train words), which had a 3-seed Dev mean of 84.35 and was evaluated on Test once (86.48% intent, 78.77% slot F1); it is not part of Stage 2.
 
 ### 5.4 Genuine Stage 2 errors (Dev)
 
