@@ -7,7 +7,8 @@ This branch holds the Stage 2 report and the code to run both systems:
 | `report/` | **Part C updated report** (`.md` and `.docx`): the AI analysis, the baseline and improved pipelines, the experiments, the results table, error analysis, limitations, lessons learned and the design sweep |
 | `src/`, `tests/` | Code for the joint BiLSTM-CRF used by both systems. Stage 1 is the default; Stage 2 adds one option, `--intent-class-weights` |
 | `scripts/` | The Stage 2 experiment, analysis, freeze and notebook scripts, plus GloVe preparation |
-| `notebooks/` | Executed evidence: `B_joint_training.ipynb` (Stage 1 baseline), `D_stage2.ipynb` (Stage 2: training log, curves, reload, single Test result) and `D_experiment_log.ipynb` (every other Stage 2 run, Dev only) |
+| `main.ipynb` | **Stage 1 baseline**, B's final executed notebook (weight 2, seed 42). It checks the dataset counts, embeds the source and tests, and prints the training log with best epoch 51. It also has the learning curves, the frozen reload, and Dev 87.16 / 80.88 and Test 86.28 / 78.01 |
+| `notebooks/` | **Stage 2**, executed: `D_stage2.ipynb` (training log, curves, reload, single Test result) and `D_experiment_log.ipynb` (every other Stage 2 run, Dev only) |
 | `artifacts/checkpoints/b_weight2_inference.pt` | The frozen Stage 1 model, used to check the baseline |
 | `results/` | Saved Dev results of every run, the freeze records and the final Dev/Test results |
 
@@ -28,7 +29,7 @@ Stage 2 adds class-weighted intent loss (Role C's proposal C1). It matches Stage
    - first, all cells of `notebooks/D_stage2.ipynb`;
    - then, all cells of `notebooks/D_experiment_log.ipynb`.
 
-   If Stage 1 is the last section of `main.ipynb`, this appends both with their outputs:
+   The `main.ipynb` on this branch ends with the Stage 1 Test evaluation, so this appends both with their outputs:
    ```python
    import nbformat
    main = nbformat.read("main.ipynb", as_version=4)
