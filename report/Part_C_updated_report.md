@@ -112,7 +112,7 @@ Role D followed this list: none of these approaches was run in Stage 2.
 
 ## 4. Experimental plan for Stage 2 and what was run
 
-Role D ran both experiments as planned here, with every rule committed to Git before the runs it governs. C1 matched the Stage 1 recipe on Dev; C2 failed its gate.
+Role D ran both experiments as planned here, with every rule fixed in writing before the runs it governs. C1 matched the Stage 1 recipe on Dev; C2 failed its gate.
 
 ### 4.1 Controls kept from the plan
 
@@ -220,14 +220,14 @@ The Stage 2 system was chosen on Dev by rules fixed before the runs, then frozen
 | Reporting | Stage 2 is the chosen configuration even if it does not beat Stage 1; seed SDs describe spread only | C1 reported, with no improvement claimed |
 | Test | Once, after the freeze, on the reproduced checkpoint. If the retrained Dev scores or weights differ from the frozen run, the notebook stops before Test and nothing is reselected | Reproduced exactly; 85.57% intent, 78.59% slot F1 |
 
-**When each rule was fixed** (Git commits in the team repository; times in SGT)
+**When each rule was fixed** (times in SGT)
 
-| Rule | Commit | Committed | Before |
-| --- | --- | --- | --- |
-| C1 weighting formula and seed-42 gate | `f147e58` | 2026-11-08 14:28 | Any C1 training |
-| C2 gate and the Stage 2 selection rule | `e62acf9` | 2026-11-08 16:29 | Any C2 training |
-| Freeze record (`freeze.json`) | `926c834` | 2026-11-08 17:30 | Any Test evaluation of C1 or C2 |
-| Sweep rules (Section 8) | `dc02b15` | 2026-11-09 19:15 | Any sweep run |
+| Rule | Fixed | Before |
+| --- | --- | --- |
+| C1 weighting formula and seed-42 gate | 2026-11-08 14:28 | Any C1 training |
+| C2 gate and the Stage 2 selection rule | 2026-11-08 16:29 | Any C2 training |
+| Freeze record (`freeze.json`) | 2026-11-08 17:30 | Any Test evaluation of C1 or C2 |
+| Sweep rules (Section 8) | 2026-11-09 19:15 | Any sweep run |
 
 **Frozen model record** (`results/stage2_c_final/freeze.json`, written 2026-11-08 17:30 SGT, before any Test evaluation of C1 or C2)
 
@@ -245,7 +245,7 @@ The Stage 2 system was chosen on Dev by rules fixed before the runs, then frozen
 
 **Caveats to state in the report**
 
-1. **The scope was chosen after seeing results.** Limiting Stage 2 to C's proposals was decided after C1's 3-seed Dev results were known. The C2 gate and the selection rule were committed before C2 ran.
+1. **The scope was chosen after seeing results.** Limiting Stage 2 to C's proposals was decided after C1's 3-seed Dev results were known. The C2 gate and the selection rule were fixed before C2 ran.
 2. **Selected, not proven better.** C1's 3-seed mean equals the Stage 1 recipe's (+0.01), so the report claims no improvement.
 3. **Different machines.** The reported Stage 1 system was trained on macOS; the fair Dev comparison is with R, trained on the same machine as Stage 2.
 4. **Unused candidate.** Role D also tried S1, which adds frozen GloVe vectors for words outside the Train vocabulary; it is not used in Stage 2.
@@ -335,7 +335,7 @@ C's proposals were tested as planned and did not improve the model overall: Stag
 **How we verified the advice**
 
 1. **Checked the premise first.** Before training, Stage 1 Dev results showed rare intents already as accurate as frequent ones (86.24% vs 86.26%; Spearman 0.12 between Train count and Dev F1).
-2. **Fixed the rules before the runs.** The weighting formula, gates, seeds and selection rule were committed to Git before each set of runs.
+2. **Fixed the rules before the runs.** The weighting formula, gates, seeds and selection rule were written down before each set of runs.
 3. **Compared like with like.** The same recipe scored 84.02 on the original macOS laptop and 83.51 on ours, so every comparison used Stage 1 retrained on the same machine.
 4. **Used three seeds.** A single seed would have reported C1 as a +0.77 gain; the 3-seed mean was +0.01.
 5. **Looked beyond the overall score.** Per-class results showed both the expected gain on rare intents and the cost on frequent ones.
@@ -358,7 +358,7 @@ A review of this analysis asked two questions: why the model uses one BiLSTM lay
 | BiLSTM width (hidden size per direction) | 64, 128, 256 (1 layer) | 42, 43, 44 |
 | Components | full model, no character CNN, no word dropout, neither | 42, 43, 44 |
 
-**Rules, fixed before the runs** (commit `dc02b15`):
+**Rules, fixed before the runs:**
 - **Centre point:** the same-machine Stage 1 runs R are the 1-layer, width-128, full-model point, reused rather than retrained. The other 21 runs are new. With 2 or 3 layers, dropout 0.3 is also applied between layers.
 - **Depth and width:** the best value is the one with the highest 3-seed mean selection score. The current setting is *supported* unless another value beats it by more than the larger of the two seed SDs. Among the values within that margin of the best, the smallest model is preferred, because it is cheaper and less prone to overfitting.
 - **Components:** the full model is compared seed by seed with the model without that component. "Consistent gain" means the full model scores higher on all three seeds, "average gain only" means only the mean is higher, and "no gain" means the mean is not higher. The same labels compare the full model with "neither".
